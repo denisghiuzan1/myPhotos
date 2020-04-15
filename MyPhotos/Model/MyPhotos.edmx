@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MyPhotosModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MyPhotosModelStoreContainer">
+    <EntitySet Name="Photos" EntityType="MyPhotosModel.Store.Photos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Landscapes" EntityType="MyPhotosModel.Store.Landscapes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="MyPhotosModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Places" EntityType="MyPhotosModel.Store.Places" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons" EntityType="MyPhotosModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhotoPerson" EntityType="MyPhotosModel.Store.PhotoPerson" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhotoLandscape" EntityType="MyPhotosModel.Store.PhotoLandscape" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhotoEvent" EntityType="MyPhotosModel.Store.PhotoEvent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhotoPlace" EntityType="MyPhotosModel.Store.PhotoPlace" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PhotoPerson_Photo" Association="MyPhotosModel.Store.FK_PhotoPerson_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoPerson" EntitySet="PhotoPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoPerson_Person" Association="MyPhotosModel.Store.FK_PhotoPerson_Person">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="PhotoPerson" EntitySet="PhotoPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoLandscape_Photo" Association="MyPhotosModel.Store.FK_PhotoLandscape_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoLandscape" EntitySet="PhotoLandscape" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoLandscape_Landscape" Association="MyPhotosModel.Store.FK_PhotoLandscape_Landscape">
+      <End Role="Landscape" EntitySet="Landscapes" />
+      <End Role="PhotoLandscape" EntitySet="PhotoLandscape" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoEvent_Photo" Association="MyPhotosModel.Store.FK_PhotoEvent_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoEvent" EntitySet="PhotoEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoEvent_Event" Association="MyPhotosModel.Store.FK_PhotoEvent_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="PhotoEvent" EntitySet="PhotoEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoPlace_Photo" Association="MyPhotosModel.Store.FK_PhotoPlace_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoPlace" EntitySet="PhotoPlace" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoPlace_Place" Association="MyPhotosModel.Store.FK_PhotoPlace_Place">
+      <End Role="Place" EntitySet="Places" />
+      <End Role="PhotoPlace" EntitySet="PhotoPlace" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Landscapes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Places">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoPerson">
+    <Key>
+      <PropertyRef Name="Photos_Id" />
+      <PropertyRef Name="Persons_Id" />
+    </Key>
+    <Property Name="Photos_Id" Type="int" Nullable="false" />
+    <Property Name="Persons_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoLandscape">
+    <Key>
+      <PropertyRef Name="Photos_Id" />
+      <PropertyRef Name="Landscapes_Id" />
+    </Key>
+    <Property Name="Photos_Id" Type="int" Nullable="false" />
+    <Property Name="Landscapes_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoEvent">
+    <Key>
+      <PropertyRef Name="Photos_Id" />
+      <PropertyRef Name="Events_Id" />
+    </Key>
+    <Property Name="Photos_Id" Type="int" Nullable="false" />
+    <Property Name="Events_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoPlace">
+    <Key>
+      <PropertyRef Name="Photos_Id" />
+      <PropertyRef Name="Places_Id" />
+    </Key>
+    <Property Name="Photos_Id" Type="int" Nullable="false" />
+    <Property Name="Places_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PhotoPerson_Photo">
+    <End Role="Photo" Type="MyPhotosModel.Store.Photos" Multiplicity="1" />
+    <End Role="PhotoPerson" Type="MyPhotosModel.Store.PhotoPerson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPerson">
+        <PropertyRef Name="Photos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoPerson_Person">
+    <End Role="PhotoPerson" Type="MyPhotosModel.Store.PhotoPerson" Multiplicity="*" />
+    <End Role="Person" Type="MyPhotosModel.Store.Persons" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPerson">
+        <PropertyRef Name="Persons_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoLandscape_Photo">
+    <End Role="Photo" Type="MyPhotosModel.Store.Photos" Multiplicity="1" />
+    <End Role="PhotoLandscape" Type="MyPhotosModel.Store.PhotoLandscape" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoLandscape">
+        <PropertyRef Name="Photos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoLandscape_Landscape">
+    <End Role="PhotoLandscape" Type="MyPhotosModel.Store.PhotoLandscape" Multiplicity="*" />
+    <End Role="Landscape" Type="MyPhotosModel.Store.Landscapes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Landscape">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoLandscape">
+        <PropertyRef Name="Landscapes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoEvent_Photo">
+    <End Role="Photo" Type="MyPhotosModel.Store.Photos" Multiplicity="1" />
+    <End Role="PhotoEvent" Type="MyPhotosModel.Store.PhotoEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoEvent">
+        <PropertyRef Name="Photos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoEvent_Event">
+    <End Role="PhotoEvent" Type="MyPhotosModel.Store.PhotoEvent" Multiplicity="*" />
+    <End Role="Event" Type="MyPhotosModel.Store.Events" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoEvent">
+        <PropertyRef Name="Events_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoPlace_Photo">
+    <End Role="Photo" Type="MyPhotosModel.Store.Photos" Multiplicity="1" />
+    <End Role="PhotoPlace" Type="MyPhotosModel.Store.PhotoPlace" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPlace">
+        <PropertyRef Name="Photos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoPlace_Place">
+    <End Role="PhotoPlace" Type="MyPhotosModel.Store.PhotoPlace" Multiplicity="*" />
+    <End Role="Place" Type="MyPhotosModel.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPlace">
+        <PropertyRef Name="Places_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyPhotosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyPhotosEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Photos" EntityType="MyPhotosModel.Photo" />
+          <EntitySet Name="Landscapes" EntityType="MyPhotosModel.Landscape" />
+          <EntitySet Name="Events" EntityType="MyPhotosModel.Event" />
+          <EntitySet Name="Places" EntityType="MyPhotosModel.Place" />
+          <EntitySet Name="Persons" EntityType="MyPhotosModel.Person" />
+          <AssociationSet Name="PhotoPerson" Association="MyPhotosModel.PhotoPerson">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Person" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoLandscape" Association="MyPhotosModel.PhotoLandscape">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Landscape" EntitySet="Landscapes" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoEvent" Association="MyPhotosModel.PhotoEvent">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoPlace" Association="MyPhotosModel.PhotoPlace">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persons" Relationship="MyPhotosModel.PhotoPerson" FromRole="Photo" ToRole="Person" />
+          <NavigationProperty Name="Landscapes" Relationship="MyPhotosModel.PhotoLandscape" FromRole="Photo" ToRole="Landscape" />
+          <NavigationProperty Name="Events" Relationship="MyPhotosModel.PhotoEvent" FromRole="Photo" ToRole="Event" />
+          <NavigationProperty Name="Places" Relationship="MyPhotosModel.PhotoPlace" FromRole="Photo" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="Landscape">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Photos" Relationship="MyPhotosModel.PhotoLandscape" FromRole="Landscape" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="true" Precision="3" />
+          <NavigationProperty Name="Photos" Relationship="MyPhotosModel.PhotoEvent" FromRole="Event" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Photos" Relationship="MyPhotosModel.PhotoPlace" FromRole="Place" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Photos" Relationship="MyPhotosModel.PhotoPerson" FromRole="Person" ToRole="Photo" />
+        </EntityType>
+        <Association Name="PhotoPerson">
+          <End Type="MyPhotosModel.Photo" Role="Photo" Multiplicity="*" />
+          <End Type="MyPhotosModel.Person" Role="Person" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotoLandscape">
+          <End Type="MyPhotosModel.Photo" Role="Photo" Multiplicity="*" />
+          <End Type="MyPhotosModel.Landscape" Role="Landscape" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotoEvent">
+          <End Type="MyPhotosModel.Photo" Role="Photo" Multiplicity="*" />
+          <End Type="MyPhotosModel.Event" Role="Event" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotoPlace">
+          <End Type="MyPhotosModel.Photo" Role="Photo" Multiplicity="*" />
+          <End Type="MyPhotosModel.Place" Role="Place" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyPhotosModelStoreContainer" CdmEntityContainer="MyPhotosEntities">
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="IsTypeOf(MyPhotosModel.Photo)">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Landscapes">
+      <EntityTypeMapping TypeName="IsTypeOf(MyPhotosModel.Landscape)">
+        <MappingFragment StoreEntitySet="Landscapes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(MyPhotosModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Places">
+      <EntityTypeMapping TypeName="IsTypeOf(MyPhotosModel.Place)">
+        <MappingFragment StoreEntitySet="Places">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="IsTypeOf(MyPhotosModel.Person)">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PhotoPerson" TypeName="MyPhotosModel.PhotoPerson" StoreEntitySet="PhotoPerson">
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Photos_Id" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Persons_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoLandscape" TypeName="MyPhotosModel.PhotoLandscape" StoreEntitySet="PhotoLandscape">
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Photos_Id" />
+      </EndProperty>
+      <EndProperty Name="Landscape">
+        <ScalarProperty Name="Id" ColumnName="Landscapes_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoEvent" TypeName="MyPhotosModel.PhotoEvent" StoreEntitySet="PhotoEvent">
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Photos_Id" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="Events_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoPlace" TypeName="MyPhotosModel.PhotoPlace" StoreEntitySet="PhotoPlace">
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Photos_Id" />
+      </EndProperty>
+      <EndProperty Name="Place">
+        <ScalarProperty Name="Id" ColumnName="Places_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
