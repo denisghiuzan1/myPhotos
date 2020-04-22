@@ -1,6 +1,6 @@
 ﻿namespace MyPhotosClientWCF
 {
-    partial class EmailForm1
+    partial class EmailForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +39,7 @@
             this.fromgmailTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.validationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // toTextBox
@@ -47,7 +48,7 @@
             this.toTextBox.Name = "toTextBox";
             this.toTextBox.Size = new System.Drawing.Size(290, 22);
             this.toTextBox.TabIndex = 0;
-            this.toTextBox.TextChanged += new System.EventHandler(this.subjectTextBox_TextChanged);
+            this.toTextBox.TextChanged += new System.EventHandler(this.toTextBox_TextChanged);
             // 
             // subjectTextBox
             // 
@@ -137,11 +138,23 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "From Gmail";
             // 
+            // validationLabel
+            // 
+            this.validationLabel.AutoSize = true;
+            this.validationLabel.ForeColor = System.Drawing.Color.Red;
+            this.validationLabel.Location = new System.Drawing.Point(206, 90);
+            this.validationLabel.Name = "validationLabel";
+            this.validationLabel.Size = new System.Drawing.Size(225, 17);
+            this.validationLabel.TabIndex = 12;
+            this.validationLabel.Text = "Please enter a valid email address";
+            this.validationLabel.Visible = false;
+            // 
             // EmailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 450);
+            this.Controls.Add(this.validationLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fromgmailTextBox);
@@ -174,5 +187,6 @@
         private System.Windows.Forms.TextBox fromgmailTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label validationLabel;
     }
 }

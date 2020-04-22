@@ -11,7 +11,7 @@ using MyPhotos.Proxy;
 
 namespace MyPhotosClientWCF
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private bool browseContext;
         private int currentIndex;
@@ -29,7 +29,7 @@ namespace MyPhotosClientWCF
         private List<Photo> searchedPhotos;
         private PhotoControllerClient photoControllerClient;
 
-        public Form1()
+        public MainForm()
         {
             photos = new List<Photo>();
             InitializeComponent();
@@ -955,7 +955,7 @@ namespace MyPhotosClientWCF
 
         private void emailButton_Click(object sender, EventArgs e)
         {
-            var email = new EmailForm1(photos[currentIndex].Path);
+            var email = new EmailForm(photos[currentIndex].Path);
             email.Show();
         }
 
