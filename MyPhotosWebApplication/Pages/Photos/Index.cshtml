@@ -1,94 +1,108 @@
 ﻿@page
+
 @model MyPhotosWebApplication.Pages.Photos.IndexModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Path)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Persons)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Events)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Places)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photos[0].Landscapes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Photos)
-    {
-        <tr style="font-size:small">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Path)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @foreach (var person in item.Persons)
-                {
-                    @Html.DisplayFor(modelItem => person.FirstName)
-                }
-            </td>
-            <td>
-                @foreach (var ev in item.Events)
-                {
-                    @Html.DisplayFor(modelItem => ev.Name)
-                }
-            </td>
-            <td>
-                @foreach (var place in item.Places)
-                {
 
-                    @Html.DisplayFor(modelItem => place.Name)
-                }
-            </td>
-            <td>
-                @foreach (var landscape in item.Landscapes)
-                {
-                    @Html.DisplayFor(modelItem => landscape.Name)
-                }
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="/Comments/List" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-page="/Comments/Create" asp-route-id="@item.Id">Add a photo</a>
-            </td>
-        </tr>
+<form>
+    <p>
+        Photo: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+@if (Model.SearchResult != 0 && !string.IsNullOrEmpty(Model.SearchString))
+{
+<p>Search result:  <em>@Html.DisplayFor(model => model.SearchResult) </em> photos</p>
+    <p>Search string:  <em>@Html.DisplayFor(model => model.SearchString) </em></p>
+}
+else if(Model.SearchResult == 0 && !string.IsNullOrEmpty(Model.SearchString))
+{
+    <p><em>No results found</em></p>
+}
+
+
+@foreach (var item in Model.Photos)
+{
+    <h3>@Html.DisplayFor(model => item.Name)</h3>
+    @if (Model.SearchResult != 0)
+    {
+        <img src="@Url.Content("http://127.0.0.1:8887/"+item.Name)" style="height:200px;width:200px;" runat="server" />
     }
-    </tbody>
-</table>
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].CreationDate)
+    </h4>
+    <p style="padding-left: 60px;">
+        @Html.DisplayFor(modelItem => item.CreationDate)
+    </p>
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Events)
+    </h4>
+    @foreach (var ev in item.Events)
+    {
+        <p style="padding-left: 60px;"><strong> @Html.DisplayFor(modelItem => ev.Name)</strong></p>
+        <p style="padding-left: 90px;">Date: @Html.DisplayFor(modelItem => ev.Date)</p>
+        <p style="padding-left: 90px;">Description: @Html.DisplayFor(modelItem => ev.Description)</p>
+        <p style="padding-left: 90px;">Name: @Html.DisplayFor(modelItem => ev.Name)</p>
+
+    }
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Id)
+    </h4>
+    <p style="padding-left: 60px;">
+        @Html.DisplayFor(modelItem => item.Id)
+    </p>
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].IsDeleted)
+    </h4>
+    <p style="padding-left: 60px;">
+        @Html.DisplayFor(modelItem => item.IsDeleted)
+    </p>
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Landscapes)
+    </h4>
+    @foreach (var landscape in item.Landscapes)
+    {
+        <p style="padding-left: 60px;"><strong> @Html.DisplayFor(modelItem => landscape.Name)</strong></p>
+
+        <p style="padding-left: 90px;">Description: @Html.DisplayFor(modelItem => landscape.Description)</p>
+        <p style="padding-left: 90px;">Name: @Html.DisplayFor(modelItem => landscape.Name)</p>
+    }
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Name)
+    </h4>
+    <p style="padding-left: 60px;">
+        @Html.DisplayFor(modelItem => item.Name)
+    </p>
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Path)
+    </h4>
+    <p style="padding-left: 60px;">
+        @Html.DisplayFor(modelItem => item.Path)
+    </p>
+
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Persons)
+    </h4>
+    @foreach (var person in item.Persons)
+    {
+        <p style="padding-left: 60px;"><strong> @Html.DisplayFor(modelItem => person.FirstName)</strong></p>
+        <p style="padding-left: 90px;">First name: @Html.DisplayFor(modelItem => person.FirstName)</p>
+        <p style="padding-left: 90px;">Last name: @Html.DisplayFor(modelItem => person.LastName)</p>
+    }
+
+    <h4 style="padding-left: 30px;">
+        @Html.DisplayNameFor(model => model.Photos[0].Places)
+    </h4>
+    @foreach (var place in item.Places)
+    {
+        <p style="padding-left: 60px;"><strong> @Html.DisplayFor(modelItem => place.Name)</strong></p>
+        <p style="padding-left: 90px;">@Html.DisplayFor(modelItem => place.Address)</p>
+        <p style="padding-left: 90px;">@Html.DisplayFor(modelItem => place.Description)</p>
+        <p style="padding-left: 90px;">@Html.DisplayFor(modelItem => place.Name)</p>
+    }
+
+}
+

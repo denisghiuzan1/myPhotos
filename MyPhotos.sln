@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPhotosHostWCF", "MyPhotos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPhotosClientWCF", "MyPhotosClientWCF\MyPhotosClientWCF.csproj", "{D92A1EC9-4257-46DC-9DEE-A4EBFBB37A94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPhotosWebApplication", "MyPhotosWebApplication\MyPhotosWebApplication.csproj", "{5C77685F-13D5-4748-BABE-B7A49964D8AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proiect3_MyPhotosWebApplication", "MyPhotosWebApplication\Proiect3_MyPhotosWebApplication.csproj", "{5C77685F-13D5-4748-BABE-B7A49964D8AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
